@@ -28,18 +28,7 @@ $.ajax({
         })
         $(".gallery").append(cardHTML);
    
-        //listen for clicks on a card; use name to get detailed data
-        // Add a click event for the search submit button
-        $("#search-submit").on("click", function() {
-            let searchVal = $("#search-input").val().toLowerCase();
-            $(".card").hide();
-            for(let s = 0; s < $(".card").length; s++) {
-                if($("#name" + s)[0].innerText.toLowerCase().indexOf(searchVal) != -1) {
-                    $(".card")[s].style.display = "block";
-                }
-            }
-        })
-        
+            
         $(".modal-container").show();
         $("#modal-close-btn").on("click", function() {
             $(".modal-container").hide();
@@ -68,7 +57,6 @@ $.ajax({
             populateModalPopup(currentIndex);
         })
 
-   
     });
 
         // Gives the modal a previous and next functionality. Extra Credit.
@@ -80,16 +68,7 @@ $.ajax({
                     </div>`;
             $(".modal-container").append(modalBtnContainer);
             $(".modal-btn-container").show();
-        }
-
-        //Gives the search box functionality.
-        function createSearch() { 
-            let search =
-                `<form action="#" method="get">
-                    <input type="search" id="search-input" class="search-input" placeholder="Search...">
-                    <input type="submit" value="&#x1F50D;" id="search-submit" class="search-submit">
-                </form>`;
-            $(".search-container").append(search);
+            $(".modal-container").hide();
         }
 
     //Function to populate the modal popup
@@ -132,5 +111,27 @@ $.ajax({
 
     $(".body").append(employeeModal);
     gallery.after(modalPopup);
-    $(".modal-container").hide();
+    
+
+    //Gives the search box functionality.
+    function createSearch() { 
+        let search =
+            `<form action="#" method="get">
+                <input type="search" id="search-input" class="search-input" placeholder="Search...">
+                <input type="submit" value="&#x1F50D;" id="search-submit" class="search-submit">
+            </form>`;
+        $(".search-container").append(search);
+    }
+
+    //listen for clicks on a card; use name to get detailed data
+        // Add a click event for the search submit button
+        $("#search-submit").on("click", function() {
+            let searchVal = $("#search-input").val().toLowerCase();
+            $(".card").hide();
+            for(let s = 0; s < $(".card").length; s++) {
+                if($("#name" + s)[0].innerText.toLowerCase().indexOf(searchVal) != -1) {
+                    $(".card")[s].style.display = "block";
+                }
+            }
+        })
    
